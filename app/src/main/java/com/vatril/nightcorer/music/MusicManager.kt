@@ -12,10 +12,10 @@ object MusicManager{
 
     private var musicList:List<Song>? = null
 
-    fun getMusicList(context:Context):List<Song>?{
+    fun getMusicList(context:Context):List<Song>{
 
         if (musicList != null){
-            return musicList
+            return musicList!!
         }
 
         val cr = context.contentResolver
@@ -38,6 +38,6 @@ object MusicManager{
         }
         cur.close()
         musicList = songs
-        return musicList
+        return musicList!!
     }
 }

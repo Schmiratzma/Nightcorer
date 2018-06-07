@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import com.vatril.nightcorer.music.Category
+import com.vatril.nightcorer.music.MusicManager
 import com.vatril.nightcorer.music.mockMusic
 
 private const val posKey = "POS"
@@ -37,9 +38,7 @@ class MusicListFragment:Fragment(){
                               savedInstanceState: Bundle?): View? {
         val rv = RecyclerView(context)
 
-        //Todo demock
-
-        val music = mockMusic(100)
+        val music = MusicManager.getMusicList(context!!)
 
         class MusicAdapter:RecyclerView.Adapter<MusicAdapter.MusicViewHolder>(){
 
