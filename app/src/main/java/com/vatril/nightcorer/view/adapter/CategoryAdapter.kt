@@ -1,5 +1,7 @@
 package com.vatril.nightcorer.view.adapter
 
+import android.content.Context
+import android.content.res.Resources
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
@@ -10,9 +12,13 @@ import android.view.ViewGroup
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
+import com.vatril.nightcorer.R
 import com.vatril.nightcorer.music.Category
 import com.vatril.nightcorer.music.MusicManager
+import com.vatril.nightcorer.music.Song
 import com.vatril.nightcorer.music.mockMusic
+import com.vatril.nightcorer.view.MusicView
+
 
 private const val posKey = "POS"
 
@@ -37,12 +43,12 @@ class MusicListFragment:Fragment(){
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val rv = RecyclerView(context)
-
         val music = MusicManager.getMusicList(context!!)
 
         class MusicAdapter:RecyclerView.Adapter<MusicAdapter.MusicViewHolder>(){
 
-            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = MusicViewHolder(TextView(context))
+            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = MusicViewHolder(
+                    MusicView(context, mode = Category.values()[arguments!!.getInt(posKey)]))
 
             override fun getItemCount():Int = when(arguments!!.getInt(posKey)){
                     Category.SONGS.ordinal -> music.size
@@ -53,18 +59,19 @@ class MusicListFragment:Fragment(){
                     else ->  0
                 }
 
-
-
             override fun onBindViewHolder(holder: MusicViewHolder, position: Int) {
-                if(holder.itemView is TextView)
-                    holder.itemView.text = when(arguments!!.getInt(posKey)){
-                        Category.SONGS.ordinal -> music[position].title
-                        Category.ALBUMS.ordinal -> music.distinctBy { it.album }[position].album
-                        Category.ARTISTS.ordinal -> music.distinctBy { it.artist }[position].artist
-                        Category.GENRES.ordinal -> music.distinctBy { it.genre }[position].genre
-                        Category.PLAYLISTS.ordinal -> "Not implemented"
-                        else ->  "ERROR"
-                    }
+                if(holder.itemView is MusicView){
+                    holder.itemView.setSong(when(arguments!!.getInt(posKey)){
+                        Category.SONGS.ordinal -> music[position]
+                        Category.ALBUMS.ordinal -> music.distinctBy { it.album }[position]
+                        Category.ARTISTS.ordinal -> music.distinctBy { it.artist }[position]
+                        Category.GENRES.ordinal -> music.distinctBy { it.genre }[position]
+                        //TODO implement that
+                        Category.PLAYLISTS.ordinal -> null
+                        else -> null
+                })
+                }
+
             }
 
             internal inner class MusicViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)

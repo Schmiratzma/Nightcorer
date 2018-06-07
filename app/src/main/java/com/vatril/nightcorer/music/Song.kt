@@ -10,8 +10,9 @@ data class Song(val title: String, val artist: String, val album: String, val du
     val cover: Bitmap? by lazy {
         if (retriever != null) {
             val embed = retriever!!.embeddedPicture
-            BitmapFactory.decodeByteArray(embed, 0, embed.size)
-        }
+            val btm = BitmapFactory.decodeByteArray(embed, 0, embed.size)
+            Bitmap.createScaledBitmap(btm,250,btm.height/(btm.width/250),false)
+        }else
         null
     }
 
@@ -19,7 +20,7 @@ data class Song(val title: String, val artist: String, val album: String, val du
             data.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST),
             data.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM),
             try {
-                Integer.parseInt(data.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION))
+                Integer.parseInt(data.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION))/1000
             } catch (e: NumberFormatException) {
                 0
             },
@@ -30,3 +31,13 @@ data class Song(val title: String, val artist: String, val album: String, val du
 }
 
 fun mockMusic(num: Int) = Array(num, { Song("Title $it", "Artist ${it / 2}", "Album ${it / 3}", it * 20, "Genre ${it % 4}") })
+
+fun timeToStamp(timeInSeconds:Int):String{
+    if (timeInSeconds == 0)
+        return ""
+    val h = timeInSeconds / 3600
+    val m = (timeInSeconds - h * 3600) / 60
+    val s = timeInSeconds - (h * 3600 + m * 60)
+
+    return "${if (h>0){"$h:"}else{""}}${if(m == 0){0}else{m}}:${if (s<10){"0$s"}else if(s == 0){"00"}else{s}}"
+}
