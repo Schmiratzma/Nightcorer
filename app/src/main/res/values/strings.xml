@@ -3,4 +3,7 @@
     <string name="ok">OK</string>
     <string name="permission_required">Permission required</string>
     <string name="permission_reason">This app needs the permission to read files in order to find your music.</string>
+    <string name="unknown_artist">Unknown Artist</string>
+    <string name="unknown_album">Unknown Album</string>
+    <string name="unknown_genre">Unknown Genre</string>
 </resources>

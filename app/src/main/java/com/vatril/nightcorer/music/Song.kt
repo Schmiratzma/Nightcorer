@@ -1,8 +1,10 @@
 package com.vatril.nightcorer.music
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.media.MediaMetadataRetriever
+import com.vatril.nightcorer.R
 
 data class Song(val title: String, val artist: String, val album: String, val durationInSeconds: Int, val genre: String) {
     private var retriever: MediaMetadataRetriever? = null
@@ -16,11 +18,11 @@ data class Song(val title: String, val artist: String, val album: String, val du
         null
     }
 
-    constructor(title: String, data: MediaMetadataRetriever) : this(title,
+    constructor(title: String, data: MediaMetadataRetriever,context:Context) : this(title,
             if (data.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST) != null)
-                data.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST) else "Unknown Artist",
+                data.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST) else context.getString(R.string.unknown_artist),
             if (data.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM) != null)
-                data.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM) else "Unknown Album",
+                data.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM) else context.getString(R.string.unknown_album),
             try {
                 Integer.parseInt(data.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION))/1000
             } catch (e: NumberFormatException) {
@@ -29,7 +31,7 @@ data class Song(val title: String, val artist: String, val album: String, val du
                 0
             },
             if (data.extractMetadata(MediaMetadataRetriever.METADATA_KEY_GENRE) != null)
-                data.extractMetadata(MediaMetadataRetriever.METADATA_KEY_GENRE) else "Unknown Genre"
+                data.extractMetadata(MediaMetadataRetriever.METADATA_KEY_GENRE) else context.getString(R.string.unknown_genre)
     ) {
         retriever = data
     }
