@@ -70,9 +70,9 @@ class MusicView(context: Context?, val mode: Category = Category.SONGS) : FrameL
                         println("Applying ${cover!!.width} x ${cover!!.height}")
                         val coverView = findViewById<ImageView>(R.id.card_cover_image)
                         coverView.setImageBitmap(cover)
-                        coverView.translationX = -coverView.width.toFloat()
+                        coverView.alpha = 0f
                         coverView.visibility = View.VISIBLE
-                        coverView.animate().translationX(0f).duration = 300
+                        coverView.animate().alpha(1f).duration = 300
 
                     }
                 } else {
