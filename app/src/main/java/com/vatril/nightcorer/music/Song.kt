@@ -25,6 +25,8 @@ data class Song(val title: String, val artist: String, val album: String, val du
                 Integer.parseInt(data.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION))/1000
             } catch (e: NumberFormatException) {
                 0
+            }catch (e: NullPointerException){
+                0
             },
             if (data.extractMetadata(MediaMetadataRetriever.METADATA_KEY_GENRE) != null)
                 data.extractMetadata(MediaMetadataRetriever.METADATA_KEY_GENRE) else "Unknown Genre"
