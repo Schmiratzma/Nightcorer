@@ -1,4 +1,4 @@
-package com.vatril.nightcorerer.view.adapter
+package com.vatril.nightcorer.view.adapter
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -10,7 +10,8 @@ import android.view.ViewGroup
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
-import com.vatril.nightcorerer.music.Category
+import com.vatril.nightcorer.music.Category
+import com.vatril.nightcorer.music.mockMusic
 
 private const val posKey = "POS"
 
@@ -38,7 +39,7 @@ class MusicListFragment:Fragment(){
 
         //Todo demock
 
-        val music = com.vatril.nightcorerer.music.mockMusic(100)
+        val music = mockMusic(100)
 
         class MusicAdapter:RecyclerView.Adapter<MusicAdapter.MusicViewHolder>(){
 

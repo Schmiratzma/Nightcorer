@@ -1,4 +1,4 @@
-package com.vatril.nightcorerer.activity
+package com.vatril.nightcorer.activity
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -8,8 +8,8 @@ import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
-import com.vatril.nightcorerer.R
-import com.vatril.nightcorerer.view.adapter.CategoryAdapter
+import com.vatril.nightcorer.R
+import com.vatril.nightcorer.view.adapter.CategoryAdapter
 
 private const val requestCode = 89543
 

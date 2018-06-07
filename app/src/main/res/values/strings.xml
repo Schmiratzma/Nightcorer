@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">NightCorerer</string>
+    <string name="app_name">Nightcorer</string>
     <string name="ok">OK</string>
     <string name="permission_required">Permission required</string>
     <string name="permission_reason">This app needs the permission to read files in order to find your music.</string>

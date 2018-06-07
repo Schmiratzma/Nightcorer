@@ -1,4 +1,4 @@
-package com.vatril.nightcorerer.music
+package com.vatril.nightcorer.music
 
 enum class Category(val display:String) {
     SONGS("Songs"),
