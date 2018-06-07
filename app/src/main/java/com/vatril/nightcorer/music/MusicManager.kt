@@ -21,7 +21,7 @@ object MusicManager{
         val cr = context.contentResolver
         val cur = cr.query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
                 arrayOf(MediaStore.Audio.Media.DATA, MediaStore.MediaColumns.TITLE),
-                "${MediaStore.Audio.Media.IS_MUSIC} != 0",null,"${MediaStore.Audio.Media.TITLE} DESC")
+                "${MediaStore.Audio.Media.IS_MUSIC} != 0",null,"${MediaStore.Audio.Media.TITLE} ASC")
         val songs = mutableListOf<Song>()
 
         if(cur.count > 0){
