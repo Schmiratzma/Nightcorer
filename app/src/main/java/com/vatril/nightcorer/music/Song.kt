@@ -17,14 +17,17 @@ data class Song(val title: String, val artist: String, val album: String, val du
     }
 
     constructor(title: String, data: MediaMetadataRetriever) : this(title,
-            data.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST),
-            data.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM),
+            if (data.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST) != null)
+                data.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST) else "Unknown Artist",
+            if (data.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM) != null)
+                data.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM) else "Unknown Album",
             try {
                 Integer.parseInt(data.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION))/1000
             } catch (e: NumberFormatException) {
                 0
             },
-            data.extractMetadata(MediaMetadataRetriever.METADATA_KEY_GENRE)
+            if (data.extractMetadata(MediaMetadataRetriever.METADATA_KEY_GENRE) != null)
+                data.extractMetadata(MediaMetadataRetriever.METADATA_KEY_GENRE) else "Unknown Genre"
     ) {
         retriever = data
     }
