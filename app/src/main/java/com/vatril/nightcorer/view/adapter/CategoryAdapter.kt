@@ -1,7 +1,6 @@
 package com.vatril.nightcorer.view.adapter
 
-import android.content.Context
-import android.content.res.Resources
+import android.os.AsyncTask
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
@@ -11,12 +10,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.TextView
-import com.vatril.nightcorer.R
 import com.vatril.nightcorer.music.Category
 import com.vatril.nightcorer.music.MusicManager
-import com.vatril.nightcorer.music.Song
-import com.vatril.nightcorer.music.mockMusic
 import com.vatril.nightcorer.view.MusicView
 
 
@@ -80,5 +75,12 @@ class MusicListFragment:Fragment(){
         rv.adapter = MusicAdapter()
         rv.layoutManager = LinearLayoutManager(context)
         return rv
+    }
+}
+
+class AsyncCategoryAdapterLoader(private val fragmentManager: FragmentManager, private var callback: (CategoryAdapter?) -> Unit) : AsyncTask<Void, Void, CategoryAdapter>(){
+    override fun doInBackground(vararg params: Void?): CategoryAdapter = CategoryAdapter(fragmentManager)
+    override fun onPostExecute(result: CategoryAdapter?) {
+        callback.invoke(result)
     }
 }
