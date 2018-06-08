@@ -58,7 +58,6 @@ class MusicView(context: Context?, val mode: Category = Category.SONGS) : FrameL
         bitmapThread = Thread({
             cover = song.cover
             coverDone = true
-            println("Cover: $cover")
         }, "Bitmap getting Thread")
         bitmapThread!!.start()
         val handler = Handler(Looper.getMainLooper())
@@ -67,7 +66,6 @@ class MusicView(context: Context?, val mode: Category = Category.SONGS) : FrameL
             override fun run() {
                 if (coverDone) {
                     if (cover != null) {
-                        println("Applying ${cover!!.width} x ${cover!!.height}")
                         val coverView = findViewById<ImageView>(R.id.card_cover_image)
                         coverView.setImageBitmap(cover)
                         coverView.alpha = 0f
