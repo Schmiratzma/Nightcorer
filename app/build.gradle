@@ -7,7 +7,7 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "nighcorer.com.vatril.nightcorerer"
+        applicationId "com.vatril.nightcorerer"
         minSdkVersion 19
         targetSdkVersion 27
         versionCode 1
