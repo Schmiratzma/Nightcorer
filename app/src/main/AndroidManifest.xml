@@ -9,7 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.vatril.nightcorer.activity.MainActivity">
+        <activity android:name="com.vatril.nightcorer.activity.MainActivity"/>
+        <activity
+            android:name="com.vatril.nightcorer.activity.SplashScreen"
+            android:theme="@style/SplashScreenTheme"
+            >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
