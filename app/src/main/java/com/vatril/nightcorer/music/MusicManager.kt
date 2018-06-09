@@ -29,7 +29,8 @@ object MusicManager{
                 try {
                     val mmr = MediaMetadataRetriever()
                     mmr.setDataSource(context, Uri.parse(Uri.encode(cur.getString(cur.getColumnIndex(MediaStore.Audio.Media.DATA)))))
-                    songs.add(Song(cur.getString(cur.getColumnIndex(MediaStore.MediaColumns.TITLE)), mmr,context))
+                    songs.add(Song.build(cur.getString(cur.getColumnIndex(MediaStore.MediaColumns.TITLE)),
+                            mmr,cur.getString(cur.getColumnIndex(MediaStore.Audio.Media.DATA)),context))
 
                 }catch (exc:RuntimeException){
                     Log.e(context.getString(R.string.app_name),"Error loading: ${cur.getString(cur.getColumnIndex(MediaStore.Audio.Media.TITLE))}")
