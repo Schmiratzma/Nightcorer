@@ -14,8 +14,18 @@ import com.vatril.nightcorer.R
 import com.vatril.nightcorer.music.Category
 import com.vatril.nightcorer.music.Song
 
-
+/**
+ * The MusicView can display a song or one of its defining properties
+ *
+ * @param context the context the View is in
+ * @param mode the category the View should display
+ */
 class MusicView(context: Context?, val mode: Category = Category.SONGS) : FrameLayout(context) {
+    /**
+     * secondary constructor that just needs a context and defaults to the Song category
+     *
+     * @param context the context the View is in
+     */
     constructor(context: Context?) : this(context, Category.SONGS)
 
     private var bitmapThread: Thread? = null
@@ -30,6 +40,11 @@ class MusicView(context: Context?, val mode: Category = Category.SONGS) : FrameL
             inflate(context, R.layout.other_category_music_display, this)
     }
 
+    /**
+     * sets the song that is suppose to be displayed
+     *
+     * @param song the song that is displayed
+     */
     fun setSong(song: Song?) {
         if (song == null) {
             if (mode != Category.SONGS) {
@@ -62,6 +77,9 @@ class MusicView(context: Context?, val mode: Category = Category.SONGS) : FrameL
         bitmapThread!!.start()
         val handler = Handler(Looper.getMainLooper())
 
+        /**
+         * displays the cover after it has loaded
+         */
         class Run : Runnable {
             override fun run() {
                 if (coverDone) {
@@ -82,6 +100,9 @@ class MusicView(context: Context?, val mode: Category = Category.SONGS) : FrameL
     }
 
 
+    /**
+     * clears the display
+     */
     private fun clear() {
         coverDone = false
         findViewById<TextView>(R.id.card_title).text = ""

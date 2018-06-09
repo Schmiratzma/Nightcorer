@@ -7,11 +7,18 @@ import android.provider.MediaStore
 import android.util.Log
 import com.vatril.nightcorer.R
 
-
+/**
+ * The MusicManager loads the music
+ */
 object MusicManager{
 
     private var musicList:List<Song>? = null
 
+    /**
+     * loads the music from the phones storage
+     *
+     * @return a list of all music
+     */
     fun getMusicList(context:Context):List<Song>{
 
         if (musicList != null){

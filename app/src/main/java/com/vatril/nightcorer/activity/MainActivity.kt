@@ -2,7 +2,6 @@ package com.vatril.nightcorer.activity
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.opengl.Visibility
 import android.os.*
 import android.support.constraint.ConstraintLayout
 import android.support.v4.content.ContextCompat
@@ -14,10 +13,20 @@ import android.widget.TextView
 import com.vatril.nightcorer.R
 import com.vatril.nightcorer.view.adapter.AsyncCategoryAdapterLoader
 
+/**
+ * the randomly chosen code for permission request
+ */
 private const val requestCode = 89543
 
+/**
+ * Main activity of the app
+ */
 class MainActivity : AppCompatActivity() {
 
+    /**
+     * inflates the layout and checks the permissions
+     * @param savedInstanceState unused but passed to super
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_screen)
@@ -30,6 +39,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Loads the music asynchronously and initializes the adapter for displaying it
+     * shows a loading indicator while loading
+     */
     private fun initList() {
         findViewById<TextView>(R.id.loading_text).text = getString(R.string.loading)
         val pager = findViewById<ViewPager>(R.id.category_pager)
@@ -46,6 +59,9 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    /**
+     * shows a dialog asking for permission to read the music
+     */
     private fun showPermissionRequestDialog() =
             AlertDialog.Builder(this).setTitle(getString(R.string.permission_required)).setCancelable(false)
                     .setMessage(getString(R.string.permission_reason)).setNeutralButton(getString(R.string.ok), { _, _ ->
@@ -54,6 +70,15 @@ class MainActivity : AppCompatActivity() {
                         }
                     }).create().show()
 
+    /**
+     * handles the users response after the permission request
+     * reaskes if the user denied it
+     * if the code was a different one, it hands the request to the superclass
+     *
+     * @param requestRequestCode the code that is used
+     * @param permissions the permissions asked
+     * @param grantResults the results of the request
+     */
     override fun onRequestPermissionsResult(requestRequestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         if (requestRequestCode == requestCode) {
             for (i in 0 until permissions.size) {
