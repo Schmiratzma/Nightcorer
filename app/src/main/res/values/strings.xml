@@ -7,4 +7,10 @@
     <string name="unknown_album">Unknown Album</string>
     <string name="unknown_genre">Unknown Genre</string>
     <string name="loading">Loading</string>
+    <string name="album_cover">album cover</string>
+    <string name="previous">previous</string>
+    <string name="play_pause">play/pause</string>
+    <string name="next">next</string>
+    <string name="loop">loop</string>
+    <string name="shuffle">shuffle</string>
 </resources>
