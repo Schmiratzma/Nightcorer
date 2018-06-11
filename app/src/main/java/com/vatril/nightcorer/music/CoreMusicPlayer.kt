@@ -88,7 +88,7 @@ object CoreMusicPlayer {
      * if not it just plays the title fom the beginning
      */
     fun previous(){
-        if (player.currentPosition > 1000) {
+        if (player.currentPosition < 5000) {
             if(position > 0)
                 position--
         }
