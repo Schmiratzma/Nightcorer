@@ -12,7 +12,6 @@ import android.widget.*
 import com.vatril.nightcorer.R
 import com.vatril.nightcorer.music.CoreMusicPlayer
 import com.vatril.nightcorer.music.Song
-import kotlinx.android.synthetic.main.bottom_panel_expanded.view.*
 
 class MusicControlView : FrameLayout {
     constructor(context: Context) : this(context, null)
