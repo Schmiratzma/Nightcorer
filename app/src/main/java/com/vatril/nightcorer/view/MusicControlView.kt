@@ -45,15 +45,14 @@ class MusicControlView : FrameLayout {
                     TransitionManager.go(sceneCollapsed, transition)
                     last = BottomSheetBehavior.STATE_COLLAPSED
                     setUpView()
-                }
-            }
-
-            override fun onStateChanged(bottom: View, newState: Int) {
-                if (last == BottomSheetBehavior.STATE_EXPANDED && newState == BottomSheetBehavior.STATE_DRAGGING) {
+                }else if(last == BottomSheetBehavior.STATE_EXPANDED && slideOffset < 0.9f){
                     TransitionManager.go(sceneCollapsed, transition)
                     last = BottomSheetBehavior.STATE_COLLAPSED
                     setUpView()
                 }
+            }
+
+            override fun onStateChanged(bottom: View, newState: Int) {
             }
 
         })
