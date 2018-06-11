@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.view.LayoutInflater
 import android.view.View
 import com.vatril.nightcorer.music.Category
+import com.vatril.nightcorer.music.CoreMusicPlayer
 import com.vatril.nightcorer.music.MusicManager
 import com.vatril.nightcorer.view.MusicView
 
@@ -116,7 +117,12 @@ class MusicListFragment:Fragment(){
             override fun onBindViewHolder(holder: MusicViewHolder, position: Int) {
                 if(holder.itemView is MusicView){
                     holder.itemView.setSong(when(arguments!!.getInt(posKey)){
-                        Category.SONGS.ordinal -> music[position]
+                        Category.SONGS.ordinal -> {
+                            holder.itemView.setOnClickListener {
+                                CoreMusicPlayer.setQueue(music,position)
+                            }
+                            music[position]
+                        }
                         Category.ALBUMS.ordinal -> music.distinctBy { it.album }[position]
                         Category.ARTISTS.ordinal -> music.distinctBy { it.artist }[position]
                         Category.GENRES.ordinal -> music.distinctBy { it.genre }[position]

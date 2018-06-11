@@ -10,8 +10,22 @@ import java.io.IOException
 object CoreMusicPlayer {
 
     private val player = MediaPlayer()
-    private var queue:List<Song>? = null
+    private var queue:MutableList<Song>? = null
     private var position: Int = 0
+
+    var currentTime:Int
+        get() = player.currentPosition/1000
+        set(value) = player.seekTo(value*1000)
+
+    var paused:Boolean
+        get() = !player.isPlaying
+        set(value) =
+            if (value)
+                player.pause()
+            else
+                player.start()
+
+    var repeat = false
 
     init {
         player.setOnPreparedListener(MediaPlayer::start)
@@ -28,7 +42,7 @@ object CoreMusicPlayer {
      */
     fun setQueue(queue:List<Song>, position: Int = 0){
         this.position = position
-        this.queue = queue
+        this.queue = MutableList(queue.size,{queue[it]})
         play()
     }
 
@@ -64,7 +78,8 @@ object CoreMusicPlayer {
      * skips to the next title
      */
     fun next(){
-        position++
+        if(!repeat)
+            position++
         play()
     }
 
@@ -78,6 +93,32 @@ object CoreMusicPlayer {
                 position--
         }
         play()
+    }
+
+    fun shuffle(){
+        if(queue != null){
+            val cur = queue!![position]
+            queue!!.shuffle()
+            val temp = queue!![0]
+            queue!![0] = cur
+            queue!! += temp
+            position = 0
+        }
+    }
+
+    fun getCurrentInfo():Song?{
+        if(queue != null)
+            if(position < queue!!.size)
+                return queue!![position]
+        return null
+    }
+
+    fun getLastInfo(){
+
+    }
+
+    fun getNextInfo(){
+
     }
 
 }
